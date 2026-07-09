@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none">
+  <rect width="180" height="180" rx="40" fill="#080809"/>
+  <path
+    d="M40 45h30l36 58V45h35v99h-33l-36-58v58H40V45z"
+    fill="url(#luxar-gradient)"
+  />
+  <defs>
+    <linearGradient id="luxar-gradient" x1="40" y1="45" x2="135" y2="135" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#c9a55c"/>
+    </linearGradient>
+  </defs>
+</svg>

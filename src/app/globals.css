@@ -1,26 +1,379 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ---- LUXAR Automotive Palette ---- */
+  --color-background: #080809;
+  --color-surface: #0c0c0e;
+  --color-surface-dim: #0c0c0e;
+  --color-surface-bright: #2a2a2e;
+  --color-surface-container-lowest: #050506;
+  --color-surface-container-low: #141418;
+  --color-surface-container: #1a1a1f;
+  --color-surface-container-high: #222228;
+  --color-surface-container-highest: #2e2e35;
+  --color-surface-variant: #2e2e35;
+
+  --color-on-surface: #f0eeec;
+  --color-on-surface-variant: #c8cdd6;
+  --color-on-background: #f0eeec;
+
+  --color-outline: #6b7280;
+  --color-outline-variant: #374151;
+
+  /* Electric blue — EV performance accent */
+  --color-surface-tint: #3b82f6;
+  --color-primary: #eff6ff;
+  --color-on-primary: #0a1628;
+  --color-primary-container: #3b82f6;
+  --color-on-primary-container: #dbeafe;
+  --color-primary-fixed: #60a5fa;
+  --color-primary-fixed-dim: #3b82f6;
+  --color-on-primary-fixed: #0a1628;
+  --color-on-primary-fixed-variant: #1e3a5f;
+
+  /* Champagne gold — luxury accent */
+  --color-secondary: #f5e6c8;
+  --color-on-secondary: #2a1f0a;
+  --color-secondary-container: #c9a55c;
+  --color-on-secondary-container: #fffbeb;
+  --color-secondary-fixed: #f5e6c8;
+  --color-secondary-fixed-dim: #c9a55c;
+
+  --color-tertiary: #e5e7eb;
+  --color-on-tertiary: #1f2937;
+  --color-tertiary-container: #d1d5db;
+
+  --color-error: #f87171;
+  --color-on-error: #450a0a;
+  --color-error-container: #7f1d1d;
+
+  /* ---- Fonts ---- */
+  --font-display: var(--font-sora);
+  --font-body: var(--font-hanken);
+  --font-mono: var(--font-jetbrains);
+
+  /* ---- Spacing ---- */
+  --spacing-base: 8px;
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 20px;
+  --spacing-section-desktop: 160px;
+  --spacing-section-mobile: 80px;
+
+  --container-max: 1280px;
+
+  --radius-sm: 0.125rem;
+  --radius: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  /* Automotive motion curve — smooth acceleration feel */
+  --ease-drive: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-oiled: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-background);
+    color: var(--color-on-surface);
+    overflow-x: hidden;
+    font-family: var(--font-body), system-ui, sans-serif;
+    min-height: 100dvh;
+    width: 100%;
+  }
+
+  /* Keep headings & body copy readable over animated bg */
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: 0 2px 24px rgba(8, 8, 9, 0.85);
+  }
+
+  p, li, label, span.font-body {
+    text-shadow: 0 1px 8px rgba(8, 8, 9, 0.9);
+  }
+
+  ::selection {
+    background-color: var(--color-secondary-fixed-dim);
+    color: var(--color-on-secondary);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container-max {
+    max-width: var(--container-max);
+    margin-inline: auto;
+  }
+
+  /* Dark scrim behind readable text blocks */
+  .readable-block {
+    position: relative;
+    padding: 1.5rem;
+    margin: -1.5rem;
+    border-radius: 1rem;
+    background: rgba(8, 8, 9, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .readable-prose p {
+    color: #d8dce3;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 2px 20px rgba(8, 8, 9, 0.9);
+  }
+
+  .glass-card {
+    backdrop-filter: blur(24px);
+    background: rgba(8, 8, 9, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.5s var(--ease-drive);
+  }
+  .glass-card:hover {
+    border-color: rgba(201, 165, 92, 0.35);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 0 40px rgba(59, 130, 246, 0.06);
+  }
+
+  .text-metal {
+    background: linear-gradient(135deg, #ffffff 0%, #c9a55c 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-neon {
+    background: linear-gradient(
+      90deg,
+      var(--color-primary-fixed-dim),
+      var(--color-secondary-fixed-dim)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary-fixed-dim),
+      var(--color-secondary-fixed-dim)
+    );
+    transition: width 0.4s var(--ease-drive);
+  }
+  .nav-link:hover::after,
+  .nav-link[data-active="true"]::after {
+    width: 100%;
+  }
+
+  .technical-line {
+    background: linear-gradient(
+      90deg,
+      rgba(201, 165, 92, 0.4) 0%,
+      rgba(59, 130, 246, 0.2) 50%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    height: 1px;
+    width: 100%;
+  }
+
+  .glow-orb {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    max-width: 90vw;
+    border-radius: 100%;
+    filter: blur(120px);
+    z-index: -1;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  /* Speed lines — automotive motion accent */
+  .speed-lines {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .speed-lines::before,
+  .speed-lines::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(59, 130, 246, 0.15),
+      transparent
+    );
+    animation: speed-line 4s var(--ease-drive) infinite;
+  }
+  .speed-lines::before {
+    top: 35%;
+    left: -100%;
+    animation-delay: 0s;
+  }
+  .speed-lines::after {
+    top: 65%;
+    left: -100%;
+    animation-delay: 2s;
+    opacity: 0.5;
+  }
+}
+
+/* Entrance animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s var(--ease-drive);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 1s var(--ease-drive);
+}
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 1s var(--ease-drive);
+}
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 1s var(--ease-drive);
+}
+.reveal-scale.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger children */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: all 0.7s var(--ease-drive);
+}
+.stagger-children.active > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: none; }
+.stagger-children.active > *:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: none; }
+.stagger-children.active > *:nth-child(3) { transition-delay: 0.25s; opacity: 1; transform: none; }
+.stagger-children.active > *:nth-child(4) { transition-delay: 0.35s; opacity: 1; transform: none; }
+.stagger-children.active > *:nth-child(5) { transition-delay: 0.45s; opacity: 1; transform: none; }
+
+/* Ripple */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(201, 165, 92, 0.4);
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+}
+@keyframes ripple-animation {
+  to { transform: scale(4); opacity: 0; }
+}
+
+@keyframes speed-line {
+  0% { transform: translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(50%); opacity: 0; }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--color-primary-fixed-dim); }
+  50% { opacity: 0.5; box-shadow: 0 0 16px var(--color-primary-fixed-dim); }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 2.5s ease-in-out infinite;
+}
+
+@keyframes headlight-sweep {
+  0%, 100% { opacity: 0.3; transform: translateX(-100%); }
+  50% { opacity: 0.8; transform: translateX(100%); }
+}
+.headlight-sweep {
+  animation: headlight-sweep 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-left, .reveal-right, .reveal-scale,
+  .stagger-children > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-float, .animate-pulse-dot, .headlight-sweep,
+  .speed-lines::before, .speed-lines::after {
+    animation: none;
+  }
+}
+
+/* ---- Mobile responsive theme ---- */
+@media (max-width: 768px) {
+  :root {
+    --spacing-section-mobile: 56px;
+    --spacing-margin-mobile: 16px;
+  }
+
+  .glow-orb {
+    width: 280px;
+    height: 280px;
+    filter: blur(80px);
+    opacity: 0.14;
+  }
+
+  .reveal-left {
+    transform: translateX(-20px);
+  }
+  .reveal-right {
+    transform: translateX(20px);
+  }
+
+  .glass-card:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .glow-orb {
+    width: 200px;
+    height: 200px;
+  }
 }
