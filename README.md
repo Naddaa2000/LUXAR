@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LUXAR — Electric Hypercars
+
+A luxury electric hypercar marketing site built with Next.js. Features a WebGL liquid shader background, interactive 3D hero, glassmorphic UI, and fully responsive layouts for mobile, tablet, and desktop.
+
+**Live site:** [https://luxar-nu.vercel.app/](https://luxar-nu.vercel.app/)
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home — hero, feature grid, performance specs, about preview, waitlist |
+| `/about` | Company story, values, timeline |
+| `/models` | Full model lineup with per-model reserve links |
+| `/design` | Aerodynamics and design philosophy |
+| `/fleet` | Corporate fleet pricing and contact form |
+| `/reserve` | Model selector with live image swap and reservation UI |
+| `/support` | Owner support guides |
+| `/privacy` | Privacy policy |
+| `/updates` | Product release notes |
+| `/resources` | Links hub |
+
+## Tech Stack
+
+- **Next.js 16** (App Router)
+- **React 19** + **TypeScript**
+- **Tailwind CSS v4**
+- **Three.js** — wireframe 3D hero wheel
+- **WebGL** — mouse/touch-reactive liquid background shader
+- **next/font** — Sora, Hanken Grotesk, JetBrains Mono
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev      # Start development server
+npm run build    # Production build
+npm run start    # Start production server
+npm run lint     # Run ESLint
+```
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+Deployed on [Vercel](https://vercel.com):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**[https://luxar-nu.vercel.app/](https://luxar-nu.vercel.app/)**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To redeploy after changes:
 
-## Deploy on Vercel
+```bash
+git push
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Vercel rebuilds automatically on push if the repo is connected.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```
+src/
+├── app/              # Pages (App Router)
+├── components/       # UI, Nav, Footer, shader, 3D hero
+└── lib/              # Site config, models data, nav links
+```
+
+## License
+
+Private project — all rights reserved.
